@@ -1,0 +1,43 @@
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "nome": "andre cunha",
+      "username": "André_Oliveira",
+      "email": "andre@email.com",
+      "senha": "andre1263242",
+      "estado": "minas gerais"
+    },
+    {
+      "id": 2,
+      "nome": "Amanda carmos dos Santos",
+      "username": "Amanda_carmos",
+      "email": "amanda@email.com",
+      "senha": "amandinha",
+      "estado": "Mato Grosso"
+    }
+  ],
+  "publicacoes": [
+    {
+      "id": 2,
+      "idUsuario": 1,
+      "titulo": "Benefícios da compostagem na agricultura",
+      "conteudo": "A compostagem é uma prática acessível e sustentável, que pode ser realizada tanto em pequenas hortas domésticas quanto em grandes propriedades agrícolas. Ao adotar a compostagem, você estará promovendo a saúde do solo, a produtividade das plantas e a sustentabilidade ambiental.",
+      "assunto": "agricultura"
+    },
+    {
+      "id": 3,
+      "idUsuario": 2,
+      "titulo": "Infestação de gafanhotos",
+      "conteudo": "ccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+      "assunto": "controle"
+    },
+    {
+      "id": 4,
+      "idUsuario": 2,
+      "titulo": "Plantando camomilas",
+      "conteudo": "ddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+      "assunto": "pecuaria"
+    }
+  ]
+}
