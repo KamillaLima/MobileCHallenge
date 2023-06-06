@@ -9,6 +9,7 @@ import Logo from '../assets/logo.png';
 import estilo from '../estilo.js';
 import { buscarUsuario } from '../requisicoes/buscarUsuario';
 
+// Import da api externa
 import api from './api.js';
 
 

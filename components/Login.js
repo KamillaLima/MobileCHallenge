@@ -3,6 +3,7 @@ import { View, Image, Text, TouchableOpacity, TextInput } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
+// Import da api externa
 import api from './api.js';
 
 import Topo from '../assets/topo.png';
@@ -72,7 +73,6 @@ const Login = ( {route} ) => {
 
           // Comparacao dos dados digitados com os presentes em usuarios (API)
           for (let i = 0; i < usuarios.length; i++) {
-            console.log(usuarios[i]);
 
             if (usuarios[i].ds_email === email && usuarios[i].ds_senha === senha) {
 
