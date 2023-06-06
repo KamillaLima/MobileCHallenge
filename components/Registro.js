@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     View, Image, Text, TouchableOpacity, TextInput 
 } from 'react-native';
@@ -8,22 +8,41 @@ import { TouchableHighlight } from 'react-native';
 import Logo from '../assets/logo.png';
 import estilo from '../estilo.js';
 import { buscarUsuario } from '../requisicoes/buscarUsuario';
+
+import api from './api.js';
+
+
+
 const Registro = () => {
+    const [usuarios, setUsuarios] = useState([]);
     const [senhaVisivel, setSenhaVisivel] = React.useState(true);
     const iconeVisivel = senhaVisivel ? 'eye-off' : 'eye';
-    const toggleSenhaVisivel = () => {
-    setSenhaVisivel(!senhaVisivel);
-    };
-    const navigation = useNavigation();
-    const handleButtonPress = () => {
-      navigation.navigate('Login');
-    };
-    const [nome,setNome] =React.useState('')
-    const [username,setUsername] =React.useState('')
-    const [senha,setSenha] =React.useState('')
+    
+    const [nome,setNome] = React.useState('')
+    const [username,setUsername] = React.useState('')
+    const [senha,setSenha] = React.useState('')
     const [email,setEmail] = React.useState('')
     const [estado,setEstado] = React.useState('')
     const id = 12;
+
+    const toggleSenhaVisivel = () => {
+    setSenhaVisivel(!senhaVisivel);
+    };
+
+    useEffect(() => {
+      api.get('/usuario')
+      .then((resp) => {
+        setUsuarios(resp.data);    
+      })
+    }, [])
+
+
+    const navigation = useNavigation();
+
+    const handleButtonPress = () => {
+      navigation.navigate('Login');
+    };
+
     return (
       <View
         style={[
@@ -61,9 +80,34 @@ const Registro = () => {
         <Text style={estilo.nomeInput}>Estado</Text>
         <TextInput style={estilo.inputs} value={estado} onChangeText={setEstado}/>
         <TouchableOpacity style={estilo.botao} onPress={() => {
-            const obj = {id,email,username,senha,estado}
-            const resultado = buscarUsuario(obj);
-            console.log(resultado)
+            
+            let usuarioAchado = false;
+            // Verificar se já existe o usuario
+            for (let i = 0; i < usuarios.length; i++) {
+  
+              if (usuarios[i].ds_email === email) {
+                usuarioAchado = true;
+
+                console.log(`Este Usuario já existe!`)
+                  break;
+              }
+            }
+            // if aqui em baixo verificando se o setlogado eh true ou nao
+            if (!usuarioAchado) {
+              api.post('/usuario', {
+                ds_email: email,
+                nm_completo: nome,
+                nm_username: username,
+                ds_senha: senha,
+                ds_estado: estado
+              })
+              .then((resp) => {
+                console.log(`Cadastro realizado com sucesso!`);
+                console.log(resp.data);
+              })
+
+            }
+
             }}>
           <Text style={estilo.textoBotao}>Cadastrar</Text>
         </TouchableOpacity>

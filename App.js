@@ -5,11 +5,14 @@ import Login from './components/Login.js';
 import Registro from './components/Registro.js';
 import Principal from './components/Principal.js';
 const Stack = createStackNavigator();
+
+
 export default function App() {
   const [logado, setLogado] = useState(false);
+  
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+            <Stack.Navigator>
         {logado ? (
           <Stack.Screen
             name="Principal"
@@ -22,6 +25,7 @@ export default function App() {
                   name="Login"
                   component={Login}
                   options={{ headerShown: false }}
+                  initialParams={{ logado, setLogado }}
                 />
               <Stack.Screen
                 name="Registro"
@@ -33,4 +37,5 @@ export default function App() {
       </Stack.Navigator>
     </NavigationContainer>
   );
+
 }
